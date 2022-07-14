@@ -1,5 +1,9 @@
 package com.codedifferently.problem01;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+
 public class Solution {
     /**
      * You will be given an array of numbers, search the array and return the longest
@@ -11,6 +15,47 @@ public class Solution {
      * @return
      */
     public String findLongestConsecutiveSet(Integer[] allNumbers){
-        return null;
+        ArrayList<Integer> maxSequence = new ArrayList<>();
+        ArrayList<Integer> currentSequence = new ArrayList<>();
+        Arrays.sort(allNumbers);
+        int curr=0;
+        while(curr<allNumbers.length){
+            int next=curr+1;
+            currentSequence.add(allNumbers[curr]);
+            if(next<allNumbers.length&&(allNumbers[next]-allNumbers[curr]==1)){
+                curr++;
+                continue;
+
+            }else if(next<allNumbers.length&&(allNumbers[next]-allNumbers[curr]!=1&&currentSequence.size()>=maxSequence.size())){
+                maxSequence.clear();
+                maxSequence.addAll(currentSequence);
+                currentSequence.clear();
+                curr++;
+                continue;
+            }
+            curr++;
+
+        }
+
+        if(currentSequence.size()> maxSequence.size()) return "Longest Set: "+currentSequence.toString().replaceAll("\\[", "{").replaceAll("\\]", "}").replaceAll(",","");
+        return "Longest Set: "+ maxSequence.toString().replaceAll("\\[", "{").replaceAll("\\]", "}").replaceAll(",","");
     }
+
+
+
+         /*
+        Arrays.sort(allNumbers);
+        ArrayList<Integer>curConsecutiveSequence = new ArrayList<>();
+        HashMap<Integer,ArrayList>sequences =new HashMap<>();
+        for(int i =0;i<allNumbers.length;){
+            curConsecutiveSequence.add(allNumbers[i]);
+            sequences.put(i,curConsecutiveSequence);
+            if()
+        }
+
+        }
+
+         */
+
+
 }
